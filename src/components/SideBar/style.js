@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const MenuSection = styled.div`
-	position: fixed;
+	position: relative;
+	float: left;
 	z-index: 99;
 	top: 56px;
 	left: 0;

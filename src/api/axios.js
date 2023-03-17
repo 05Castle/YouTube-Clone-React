@@ -44,3 +44,16 @@ export const getCommentData = async (videoId) => {
 		console.error(error)
 	}
 }
+
+export const getRelativedVideos = async (videoId) => {
+	const response = await api.get('/search', {
+		params: {
+			part: 'snippet',
+			maxResults: '25',
+			relatedToVideoId: videoId,
+			type: 'video',
+			regionCode: 'kr',
+		},
+	})
+	return response.data.items
+}

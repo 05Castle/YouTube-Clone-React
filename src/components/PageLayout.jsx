@@ -1,28 +1,26 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import SideBar from './SideBar'
-import { useMemo } from 'react'
 import styled from 'styled-components'
+import Header from './Header'
 
 function PageLayout() {
-	const pathname = useLocation().pathname
-	const sidebarPath = useMemo(() => ['/', '/search'], [])
 	return (
-		<SideBarLayout>
-			{sidebarPath.includes(pathname) && <SideBar />}
-
+		<LayoutContainer>
+			<Header />
 			<main>
+				<SideBar />
 				<Outlet />
 			</main>
-		</SideBarLayout>
+		</LayoutContainer>
 	)
 }
 
 export default PageLayout
 
-const SideBarLayout = styled.div`
-	display: flex;
-
+const LayoutContainer = styled.div`
 	main {
 		width: 100%;
+		position: relative;
+		float: right;
 	}
 `
