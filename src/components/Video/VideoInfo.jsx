@@ -12,7 +12,6 @@ export default function VideoInfo({ props }) {
 				<VideoOptionInfo>
 					<div>조회수 {props.statistics.viewCount}회</div>
 					<div>{props.snippet.publishedAt}</div>
-					{/* <div>{props.snippet.tags}</div> */}
 				</VideoOptionInfo>
 				<VideoDescription>{props.snippet.description}</VideoDescription>
 				<button
@@ -29,7 +28,6 @@ export default function VideoInfo({ props }) {
 }
 
 const VideoInfoContainer = styled.div`
-	/* width: 100%; */
 	height: 104px;
 	padding: 12px;
 	overflow: hidden;
@@ -58,7 +56,6 @@ const VideoOptionInfo = styled.div`
 	display: flex;
 	gap: 4px;
 	font-size: 14px;
-	/* line-height: 20px; */
 	font-weight: 500;
 `
 const VideoDescription = styled.p`
