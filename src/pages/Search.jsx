@@ -3,12 +3,6 @@ import { useLocation, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import api from '../api/axios'
 
-// 테스트 용이하게 하기 위한 임시 스타일
-const PaddingSection = styled.div`
-	margin-top: 60px;
-	margin-left: 250px;
-`
-
 export const getSearchVideos = async (search) => {
 	const response = await api.get('/search', {
 		params: {
@@ -33,10 +27,13 @@ function Search() {
 	return (
 		<PaddingSection>
 			{searchVideos.map((video) => (
-				<div key={video.id.videoId}>
-					<Link to={`/video/${video.id.videoId}`}>
+				<div className="videoContainer" key={video.id.videoId}>
+					<Link className="searchVideoList" to={`/video/${video.id.videoId}`}>
 						<img src={video.snippet.thumbnails.medium.url} alt="썸네일" />
-						<span>{video.snippet.title}</span>
+						<div className="videoInfo">
+							<span className="videoTitle">{video.snippet.title}</span>
+							<span className="channelTitle">{video.snippet.channelTitle}</span>
+						</div>
 					</Link>
 				</div>
 			))}
@@ -45,3 +42,33 @@ function Search() {
 }
 
 export default Search
+
+const PaddingSection = styled.div`
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 40px;
+	.videoContainer {
+		margin: 20px 0;
+	}
+	.searchVideoList {
+		display: flex;
+		img {
+			border-radius: 10px;
+		}
+		.videoInfo {
+			margin-left: 10px;
+			.videoTitle {
+				margin-bottom: 20px;
+				font-size: 1.2rem;
+				line-height: 2rem;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
+				display: -webkit-box;
+				overflow: hidden;
+			}
+			.channelTitle {
+				font-size: 0.8rem;
+			}
+		}
+	}
+`

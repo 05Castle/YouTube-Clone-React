@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-// import VideoInfoCard from '../components/VideoInfoCard'
+// import YouTube from 'react-youtube'
+import { Link } from 'react-router-dom'
 
 const Main = () => {
 	const [playlist, setPlaylist] = useState([])
 	useEffect(() => {
 		axios
 			.get(
-				'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyCZmSMmjRPzSl8o8u6KUIR4Nf8J2v1DJGs'
+				'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=4&key=AIzaSyCZmSMmjRPzSl8o8u6KUIR4Nf8J2v1DJGs'
 			)
 			.then((res) => {
 				console.log(res)
@@ -16,8 +17,6 @@ const Main = () => {
 			})
 			.catch(() => {})
 	}, [])
-
-	console.log(playlist)
 
 	return (
 		<>
@@ -31,18 +30,20 @@ const Main = () => {
 					<div className="filterItem">수학</div>
 				</div>
 			</VideoCard>
-			<VideoList>
+			<VideoList className="video_content">
 				<div className="videoComponent">
 					{playlist &&
 						playlist.map((i, idx) => {
 							return (
 								<div className="playlist" key={idx}>
-									<img src={i.snippet.thumbnails.high['url']} alt="" />
+									<Link to={'/video/' + i.id}>
+										<img src={i.snippet.thumbnails.high['url']} alt="" />
+									</Link>
 									<div>
-										<div>{i.snippet.localized['title']}</div>
-										<div>{i.snippet.channelId}</div>
+										<Link to={'/video/' + i.id}>
+											<h1>{i.snippet.localized['title']}</h1>
+										</Link>
 									</div>
-									{/* <VideoInfoCard /> */}
 								</div>
 							)
 						})}
@@ -53,6 +54,13 @@ const Main = () => {
 }
 
 const VideoCard = styled.div`
+	.video_content {
+		width: 100%;
+		padding-top: 24px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
 	.filterWrapper {
 		width: -webkit-fill-available;
 		position: sticky;
@@ -87,7 +95,7 @@ const VideoList = styled.div`
 	.playlist {
 		width: 24%;
 	}
-	.playlist > img {
+	.playlist > a > img {
 		width: 100%;
 	}
 

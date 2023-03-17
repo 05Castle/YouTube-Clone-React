@@ -1,28 +1,32 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import SideBar from './SideBar'
-import { useMemo } from 'react'
 import styled from 'styled-components'
+import Header from './Header'
+import { useRecoilValue } from 'recoil'
+import { navToggleState } from '../atom'
 
 function PageLayout() {
-	const pathname = useLocation().pathname
-	const sidebarPath = useMemo(() => ['/', '/search'], [])
-	return (
-		<SideBarLayout>
-			{sidebarPath.includes(pathname) && <SideBar />}
+	const open = useRecoilValue(navToggleState)
 
-			<main>
+	return (
+		<LayoutContainer>
+			<Header />
+			<main className={open ? 'open' : ''}>
+				<SideBar />
 				<Outlet />
 			</main>
-		</SideBarLayout>
+		</LayoutContainer>
 	)
 }
 
 export default PageLayout
 
-const SideBarLayout = styled.div`
-	display: flex;
-
+const LayoutContainer = styled.div`
 	main {
-		width: 100%;
+		width: calc(100%-240px);
+		margin-top: 56px;
+		&.open {
+			margin-left: 240px;
+		}
 	}
 `

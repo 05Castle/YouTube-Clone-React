@@ -1,43 +1,16 @@
 import { useState, useEffect } from 'react'
-import api from '../../api/axios'
-import { Link } from 'react-router-dom'
+import { getRelativedVideos } from '../../api/axios'
+import { Link, useParams } from 'react-router-dom'
 import { RelatedVideoWrapper, VideoImg, VideoInfo } from './style'
 
-// export const getRelativedVideos = async (videoId) => {
-// 	const response = await api.get('/search', {
-// 		params: {
-//       part: 'snippet',
-//       maxResults: '10',
-//       relatedToVideoId: videoId,
-//       type: 'video',
-// 			regionCode: 'kr'
-// 		},
-// 	})
-// 	return response.data.items
-// }
-
-// videoId 값을 받아와야 하는데 아직 만들어지지 않았으므로, 임의의 영상 ID로 일단 진행.
-
-export const getRelativedVideos = async () => {
-	const response = await api.get('/search', {
-		params: {
-			part: 'snippet',
-			maxResults: '25',
-			relatedToVideoId: 'o5KfPhT_19M',
-			type: 'video',
-			regionCode: 'kr',
-		},
-	})
-	return response.data.items
-}
-
-const RelativedVideos = (videoId) => {
+const RelativedVideos = () => {
 	const [videos, setVideos] = useState([])
+	const { id: videoId } = useParams()
 	useEffect(() => {
 		getRelativedVideos(videoId).then((res) => {
 			setVideos(res)
 		})
-	}, [])
+	}, [videoId])
 	return (
 		<>
 			{videos.map((video) => (
@@ -51,7 +24,6 @@ const RelativedVideos = (videoId) => {
 								<p className="videoTitle">{video.snippet.title}</p>
 							</div>
 							<p className="channelTitle">{video.snippet.channelTitle}</p>
-							<p className="subscribeInfo">조회수n회</p>
 						</VideoInfo>
 					</Link>
 				</RelatedVideoWrapper>

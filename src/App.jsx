@@ -1,6 +1,5 @@
 import GlobalStyle from './style/global'
 import { Route, Routes } from 'react-router-dom'
-import Header from './components/Header'
 import PageLayout from './components/PageLayout'
 // PAGES
 import Main from './pages/Main'
@@ -12,7 +11,6 @@ function App() {
 	return (
 		<>
 			<GlobalStyle />
-			<Header />
 			<Routes>
 				<Route path="/" element={<PageLayout />}>
 					<Route index element={<Main />} />
