@@ -49,7 +49,7 @@ export const getRelativedVideos = async (videoId) => {
 	const response = await api.get('/search', {
 		params: {
 			part: 'snippet',
-			maxResults: '25',
+			maxResults: '20',
 			relatedToVideoId: videoId,
 			type: 'video',
 			regionCode: 'kr',

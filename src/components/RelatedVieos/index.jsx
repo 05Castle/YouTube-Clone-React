@@ -10,7 +10,7 @@ const RelativedVideos = () => {
 		getRelativedVideos(videoId).then((res) => {
 			setVideos(res)
 		})
-	}, [])
+	}, [videoId])
 	return (
 		<>
 			{videos.map((video) => (
@@ -24,7 +24,6 @@ const RelativedVideos = () => {
 								<p className="videoTitle">{video.snippet.title}</p>
 							</div>
 							<p className="channelTitle">{video.snippet.channelTitle}</p>
-							<p className="subscribeInfo">조회수n회</p>
 						</VideoInfo>
 					</Link>
 				</RelatedVideoWrapper>

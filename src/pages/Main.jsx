@@ -20,7 +20,7 @@ const Main = () => {
 
 	return (
 		<>
-			<VideoCard style={{ marginLeft: 240 }}>
+			<VideoCard>
 				<div className="filterWrapper">
 					<div className="filterItem">전체</div>
 					<div className="filterItem">실시간</div>
@@ -30,7 +30,7 @@ const Main = () => {
 					<div className="filterItem">수학</div>
 				</div>
 			</VideoCard>
-			<VideoList className="video_content" style={{ marginLeft: 240 }}>
+			<VideoList className="video_content">
 				<div className="videoComponent">
 					{playlist &&
 						playlist.map((i, idx) => {
@@ -60,7 +60,6 @@ const VideoCard = styled.div`
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		margin-left: 240px;
 	}
 	.filterWrapper {
 		width: -webkit-fill-available;

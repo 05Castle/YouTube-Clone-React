@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const RelatedVideoWrapper = styled.div`
-	width: 100%;
+	width: 420px;
 	height: 94px;
 	margin-top: 16px;
 	a {
@@ -27,7 +27,6 @@ export const VideoInfo = styled.div`
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 		display: -webkit-box;
-		margin-bottom: 0.4rem;
 		overflow: hidden;
 	}
 	.channelTitle {

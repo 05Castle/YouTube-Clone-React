@@ -2,12 +2,13 @@ import { HeaderContainer, HeaderIconBox, SearchBox, LoginBox } from './style'
 import logo from '../../assets/logo.png'
 import { useRecoilState } from 'recoil'
 import { navToggleState } from '../../atom'
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 
 function Header() {
 	const [isOpen, setIsOpen] = useRecoilState(navToggleState) //eslint-disable-line no-unused-vars
 	const [keyword, setKeyword] = useState('')
+	const location = useLocation().pathname
 	const navigate = useNavigate()
 	const handleToggle = () => {
 		setIsOpen((isOpen) => !isOpen)
@@ -24,6 +25,9 @@ function Header() {
 			setKeyword('')
 		}
 	}
+	useEffect(() => {
+		location.startsWith('/video') ? setIsOpen(false) : setIsOpen(true)
+	}, [location])
 
 	return (
 		<HeaderContainer>

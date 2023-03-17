@@ -23,12 +23,12 @@ export const HeaderContainer = styled.header`
 
 export const HeaderIconBox = styled.div`
 	.toggleIcon {
+		margin-right: 30px;
 		&:hover {
 			cursor: pointer;
 		}
 	}
 	img {
-		margin-left: 30px;
 		height: 20px;
 	}
 `
