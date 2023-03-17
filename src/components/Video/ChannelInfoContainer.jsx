@@ -7,8 +7,10 @@ export default function ChannelInfoContainer({ videoItemData }) {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const channelId = videoItemData.snippet?.channelId
-			setChannelItemData(...(await getChannelData(channelId)))
+			if (videoItemData) {
+				const channelId = videoItemData?.snippet?.channelId
+				setChannelItemData(...(await getChannelData(channelId)))
+			}
 		}
 		fetchData()
 	}, [videoItemData])
